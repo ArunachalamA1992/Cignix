@@ -4,7 +4,7 @@ import {
     View,
     StyleSheet,
     Animated, Text,
-    StatusBar, Image,
+    StatusBar, Image, KeyboardAvoidingView, ScrollView,
     SafeAreaView, ImageBackground,
     TouchableOpacity, TextInput, Keyboard, TouchableWithoutFeedback,
 } from 'react-native';
@@ -69,8 +69,14 @@ const EmailPassword = () => {
     };
 
     return (
-        <DismissKeyboard>
-            <SafeAreaView style={styles.container}>
+
+        // <DismissKeyboard>
+        <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+            style={styles.container}>
+            <ScrollView
+                contentContainerStyle={styles.scrollContent}
+                keyboardShouldPersistTaps="handled" >
                 <StatusBar
                     hidden={false} // Hides the status bar
                     backgroundColor={Color.white} // Matches background color
@@ -78,157 +84,156 @@ const EmailPassword = () => {
                     barStyle={'dark-content'}
                 />
 
-                <View style={{ flex: 1, width: scr_width, alignItems: 'center' }}>
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}></View>
-                    <View style={{ flex: 5, width: '100%', justifyContent: 'flex-start', alignItems: 'center' }}>
-                        <View style={{ width: '100%', justifyContent: 'flex-start', alignItems: 'flex-start', paddingHorizontal: 20 }}>
-                            <Image
-                                source={require('../../assets/Logos/cignix_black.png')}
-                                style={[styles.image]}
-                            />
+                <View style={{ width: scr_width, height: scr_height, alignItems: 'center' }}>
+
+                    <View style={{ flex: 0.5, width: '100%', justifyContent: 'flex-end', alignItems: 'flex-start' }}>
+                        <Image
+                            source={require('../../assets/Logos/cignix_main.png')}
+                            style={[styles.image]}
+                        />
+                    </View>
+                    <View style={{ flex: 2, width: '100%', justifyContent: 'flex-start', alignItems: 'flex-start', paddingHorizontal: 20 }}>
+                        <Text style={{ fontSize: 26, color: Color.black, fontFamily: Mulish.Bold, paddingVertical: 5 }}>Welcome Back,</Text>
+                        <Text style={{ fontSize: 14, color: Color.cloudyGrey, fontFamily: Mulish.Medium }}>Login with your Email and Password</Text>
+
+                        <View style={{ marginVertical: 20 }}>
+                            <View style={styles.NumberBoxConatiner}>
+                                <View style={{ flexDirection: 'row', padding: 5, justifyContent: 'center', alignItems: 'center', marginHorizontal: 5 }}>
+                                    <Iconviewcomponent
+                                        viewstyle={{ alignItems: 'center', justifyContent: 'center' }}
+                                        Icontag="MaterialCommunityIcons"
+                                        icon_size={22}
+                                        icon_color={Color.grey}
+                                        iconname="email-outline"
+                                    />
+                                </View>
+                                <TextInput
+                                    placeholder="Enter Your Email ID"
+                                    placeholderTextColor={Color.grey}
+                                    keyboardType="email-address"
+                                    value={email}
+                                    onChangeText={value => {
+                                        setEmail(value);
+                                        handleValidEmail(value);
+                                    }}
+                                    style={styles.numberTextBox}
+                                />
+                            </View>
+                            {emailValidError ? (
+                                <Text
+                                    style={{
+                                        width: '100%',
+                                        textAlign: 'left',
+                                        fontFamily: Mulish.Medium,
+                                        paddingVertical: 5,
+                                        fontSize: 14,
+                                        color: 'red',
+                                    }}>
+                                    {emailValidError}
+                                </Text>
+                            ) : null}
                         </View>
-                        <View style={{ width: '100%', justifyContent: 'flex-start', alignItems: 'flex-start', paddingHorizontal: 20 }}>
-                            <Text style={{ fontSize: 30, color: Color.black, fontFamily: Mulish.Bold, paddingVertical: 5 }}>Welcome Back,</Text>
-                            <Text style={{ fontSize: 16, color: Color.cloudyGrey, fontFamily: Mulish.Medium }}>Login with your Email and Password</Text>
-
-                            <View style={{ marginTop: 30 }}>
-                                <View style={styles.NumberBoxConatiner}>
-                                    <View style={{ flexDirection: 'row', padding: 10, justifyContent: 'center', alignItems: 'center', marginHorizontal: 10 }}>
-                                        <Iconviewcomponent
-                                            viewstyle={{ alignItems: 'center', justifyContent: 'center' }}
-                                            Icontag="MaterialCommunityIcons"
-                                            icon_size={25}
-                                            icon_color={Color.grey}
-                                            iconname="email-outline"
-                                        />
-                                    </View>
-                                    <TextInput
-                                        placeholder="Enter Your Email ID"
-                                        placeholderTextColor={Color.grey}
-                                        keyboardType="email-address"
-                                        value={email}
-                                        onChangeText={value => {
-                                            setEmail(value);
-                                            handleValidEmail(value);
-                                        }}
-                                        style={styles.numberTextBox}
+                        {/* <View style={{ marginVertical: 20 }}> */}
+                        <View style={[styles.NumberBoxConatiner, { marginVertical: 0 }]}>
+                            <View style={{ flexDirection: 'row', padding: 5, justifyContent: 'center', alignItems: 'center', marginHorizontal: 5 }}>
+                                <TouchableOpacity
+                                    onPress={() => setPasswordvisibility(!password_visible)}
+                                    style={styles.numberCountryCode}>
+                                    <Iconviewcomponent
+                                        viewstyle={{ alignItems: 'center', justifyContent: 'center' }}
+                                        Icontag="MaterialCommunityIcons"
+                                        icon_size={22}
+                                        icon_color={Color.grey}
+                                        iconname={!password_visible ? 'eye-off' : 'eye'}
                                     />
-                                </View>
-                                {emailValidError ? (
-                                    <Text
-                                        style={{
-                                            width: '100%',
-                                            textAlign: 'left',
-                                            fontFamily: Mulish.Medium,
-                                            paddingVertical: 5,
-                                            fontSize: 14,
-                                            color: 'red',
-                                        }}>
-                                        {emailValidError}
-                                    </Text>
-                                ) : null}
-                            </View>
-                            <View style={{ marginVertical: 20 }}>
-                                <View style={styles.NumberBoxConatiner}>
-                                    <View style={{ flexDirection: 'row', padding: 10, justifyContent: 'center', alignItems: 'center', marginHorizontal: 10 }}>
-                                        <TouchableOpacity
-                                            onPress={() => setPasswordvisibility(!password_visible)}
-                                            style={styles.numberCountryCode}>
-                                            <Iconviewcomponent
-                                                viewstyle={{ alignItems: 'center', justifyContent: 'center' }}
-                                                Icontag="MaterialCommunityIcons"
-                                                icon_size={25}
-                                                icon_color={Color.grey}
-                                                iconname={!password_visible ? 'eye-off' : 'eye'}
-                                            />
-                                        </TouchableOpacity>
-                                    </View>
-                                    <TextInput
-                                        style={styles.numberTextBox}
-                                        placeholder="Password"
-                                        placeholderTextColor={Color.grey}
-                                        secureTextEntry={!password_visible}
-                                        value={password}
-                                        keyboardType="name-phone-pad"
-                                        onChangeText={password => {
-                                            if (password.length < 6) {
-                                                setMinPass('set minimum character as 6');
-                                                setPassword(password);
-                                            } else {
-                                                setPassword(password);
-                                                setMinPass('');
-                                            }
-                                        }}
-                                    />
-                                </View>
-                                {minPass != 'null' ? (
-                                    <Text
-                                        style={{
-                                            width: '95%',
-                                            fontSize: 14,
-                                            color: 'red',
-                                        }}>
-                                        {minPass}
-                                    </Text>
-                                ) : null}
-                            </View>
-
-                            <TouchableOpacity onPress={() => login()} style={{ width: '100%', height: 55, justifyContent: 'center', alignItems: 'center', backgroundColor: Color.primary, borderRadius: 30, }}>
-                                <Text style={{ fontSize: 18, color: Color.white, fontFamily: Mulish.SemiBold }}>Log in</Text>
-                            </TouchableOpacity>
-
-                            <View style={{ width: '95%', justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
-                                <TouchableOpacity style={{ padding: 5 }}
-                                    onPress={() => common_fn.showToast('Still working...')}>
-                                    <Text style={{ fontSize: 14, color: '#2C83EA', fontFamily: Mulish.Bold, paddingHorizontal: 5, letterSpacing: 0.2 }}>Forgot Password?</Text>
                                 </TouchableOpacity>
                             </View>
+                            <TextInput
+                                style={styles.numberTextBox}
+                                placeholder="Password"
+                                placeholderTextColor={Color.grey}
+                                secureTextEntry={!password_visible}
+                                value={password}
+                                keyboardType="name-phone-pad"
+                                onChangeText={password => {
+                                    if (password.length < 6) {
+                                        setMinPass('set minimum character as 6');
+                                        setPassword(password);
+                                    } else {
+                                        setPassword(password);
+                                        setMinPass('');
+                                    }
+                                }}
+                            />
+                        </View>
+                        {minPass != 'null' ? (
+                            <Text
+                                style={{
+                                    width: '95%',
+                                    fontSize: 14,
+                                    color: 'red',
+                                }}>
+                                {minPass}
+                            </Text>
+                        ) : null}
+                        {/* </View> */}
 
-                            <View style={{ width: '95%', flexDirection: 'row', alignItems: 'center', marginVertical: 20 }}>
-                                <View style={{ width: '40%', height: 0.5, borderStyle: 'dashed', borderWidth: 0.5, backgroundColor: Color.softGrey, borderRadius: 1 }}></View>
+                        <TouchableOpacity onPress={() => login()} style={{ width: '100%', height: 50, justifyContent: 'center', alignItems: 'center', backgroundColor: Color.primary, borderRadius: 30, }}>
+                            <Text style={{ fontSize: 16, color: Color.white, fontFamily: Mulish.SemiBold }}>Log in</Text>
+                        </TouchableOpacity>
+
+                        <View style={{ width: '95%', justifyContent: 'center', alignItems: 'center', marginVertical: 10 }}>
+                            <TouchableOpacity style={{ padding: 5 }}
+                                onPress={() => common_fn.showToast('Still working...')}>
+                                <Text style={{ fontSize: 14, color: '#4259B7', fontFamily: Mulish.Bold, paddingHorizontal: 5, letterSpacing: 0.2 }}>Forgot Password?</Text>
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={{ flex: 0, width: '100%', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+                            <View style={{ width: '100%', flexDirection: 'row', alignItems: 'center', marginVertical: 10 }}>
+                                <View style={{ width: '35%', height: 0.5, borderStyle: 'dashed', borderWidth: 0.5, backgroundColor: Color.softGrey, borderRadius: 1 }}></View>
                                 <View>
-                                    <Text style={{ fontSize: 14, color: Color.cloudyGrey, fontFamily: Mulish.Medium, paddingHorizontal: 5 }}>Or Login With</Text>
+                                    <Text style={{ fontSize: 12, color: Color.cloudyGrey, fontFamily: Mulish.Medium, paddingHorizontal: 10 }}>Or Login With</Text>
                                 </View>
-                                <View style={{ width: '40%', height: 0.5, borderStyle: 'dashed', borderWidth: 0.5, backgroundColor: Color.softGrey, borderRadius: 1 }}></View>
+                                <View style={{ width: '35%', height: 0.5, borderStyle: 'dashed', borderWidth: 0.5, backgroundColor: Color.softGrey, borderRadius: 1 }}></View>
                             </View>
 
                             <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginVertical: 20 }}>
-                                <TouchableOpacity style={{ flex: 1, height: 55, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', borderRadius: 30, borderWidth: 1, borderColor: '#C5C5C5' }}>
+                                <TouchableOpacity style={{ flex: 1, height: 50, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', borderRadius: 30, borderWidth: 1, borderColor: '#C5C5C5' }}>
                                     <Image
                                         source={require('../../assets/Images/google.png')}
-                                        style={{ width: 24, height: 24, resizeMode: 'contain' }}
+                                        style={{ width: 22, height: 22, resizeMode: 'contain' }}
                                     />
-                                    <Text style={{ fontSize: 18, color: Color.cloudyGrey, fontFamily: Mulish.SemiBold, paddingHorizontal: 10 }}>Google</Text>
+                                    <Text style={{ fontSize: 16, color: Color.cloudyGrey, fontFamily: Mulish.SemiBold, paddingHorizontal: 10 }}>Google</Text>
                                 </TouchableOpacity>
                                 <View style={{ width: 10, height: '100%', backgroundColor: Color.white }}></View>
                                 <TouchableOpacity
                                     onPress={() => navigation.navigate("Login")}
-                                    style={{ flex: 1, height: 55, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', borderRadius: 30, borderWidth: 1, borderColor: '#C5C5C5' }}>
+                                    style={{ flex: 1, height: 50, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', borderRadius: 30, borderWidth: 1, borderColor: '#C5C5C5' }}>
                                     <Iconviewcomponent
                                         viewstyle={{ alignItems: 'center', justifyContent: 'center' }}
                                         Icontag="Ionicons"
-                                        icon_size={24}
-                                        icon_color={'#2C83EA'}
+                                        icon_size={22}
+                                        icon_color={'#4259B7'}
                                         iconname="call"
                                     />
-                                    <Text style={{ fontSize: 18, color: Color.cloudyGrey, fontFamily: Mulish.SemiBold, paddingHorizontal: 10 }}>Phone</Text>
+                                    <Text style={{ fontSize: 16, color: Color.cloudyGrey, fontFamily: Mulish.SemiBold, paddingHorizontal: 10 }}>Phone</Text>
                                 </TouchableOpacity>
                             </View>
 
-                            <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
-                                <Text style={{ fontSize: 18, color: Color.Venus, fontFamily: Mulish.Medium, paddingHorizontal: 5 }}>Don’t have an account? </Text>
+                            <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginVertical: 10 }}>
+                                <Text style={{ fontSize: 16, color: Color.Venus, fontFamily: Mulish.Medium, paddingHorizontal: 5 }}>Don’t have an account? </Text>
                                 <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-                                    <Text style={{ fontSize: 20, color: Color.primary, fontFamily: Mulish.SemiBold }}>Sign up</Text>
+                                    <Text style={{ fontSize: 18, color: Color.primary, fontFamily: Mulish.SemiBold }}>Sign up</Text>
                                 </TouchableOpacity>
                             </View>
-
                         </View>
                     </View>
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}></View>
-                </View>
 
-            </SafeAreaView>
-        </DismissKeyboard>
+                </View>
+            </ScrollView>
+        </KeyboardAvoidingView>
+        //  </DismissKeyboard>
     );
 };
 
@@ -239,22 +244,28 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: Color.white,
     },
+    scrollContent: {
+        width: scr_width,
+        alignItems: 'center',
+        padding: 20,
+        // justifyContent: 'center',
+    },
     image: {
-        width: 160, height: 80, resizeMode: 'contain'
+        width: 170, height: 80, resizeMode: 'contain'
     },
     NumberBoxConatiner: {
         width: '100%',
         display: "flex",
         borderColor: Color.grey,
         borderWidth: 1,
-        height: 55,
+        height: 50,
         flexDirection: 'row',
         alignItems: 'center',
         borderRadius: 5,
     },
     numberCountryCode: {
         color: Color.black,
-        fontSize: 16,
+        fontSize: 14,
         fontFamily: Mulish.SemiBold,
         textAlign: 'center',
         alignItems: 'center',
@@ -270,11 +281,11 @@ const styles = StyleSheet.create({
     numberTextBox: {
         flex: 1,
         display: 'flex',
-        height: 55,
+        height: 50,
         // borderLeftColor: Color.grey,
         // borderLeftWidth: 1,
         color: Color.black,
-        fontSize: 16,
+        fontSize: 14,
         padding: 5,
         paddingTop: 5,
         paddingHorizontal: 10,

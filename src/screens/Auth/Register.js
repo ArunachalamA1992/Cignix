@@ -18,6 +18,7 @@ import { useNavigation } from '@react-navigation/native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { BottomSheet } from 'react-native-btr';
 import common_fn from '../../Components/common_fn';
+import { scr_width } from '../../Components/Dimensions';
 
 // create a component
 const Register = () => {
@@ -233,21 +234,22 @@ const Register = () => {
             <ScrollView
                 contentContainerStyle={styles.scrollContent}
                 keyboardShouldPersistTaps="handled" >
-                <View style={{ width: '100%', justifyContent: 'flex-start', alignItems: 'flex-start', paddingHorizontal: 10 }}>
+                <View style={{ width: scr_width, justifyContent: 'flex-start', alignItems: 'flex-start' }}>
                     <Image
-                        source={require('../../assets/Logos/cignix_black.png')}
+                        source={require('../../assets/Logos/cignix_main.png')}
                         style={[styles.image]}
                     />
                 </View>
-                <Text style={styles.header}>Let’s Get Started</Text>
-                <Text style={{ fontSize: 14, color: Color.cloudyGrey, fontFamily: Mulish.Medium, letterSpacing: 0.5, paddingHorizontal: 10, paddingVertical: 10 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ante sapien.</Text>
-
+                <View style={{ width: '100%', paddingHorizontal: 5, marginTop: 10 }}>
+                    <Text style={styles.header}>Let’s Get Started</Text>
+                    <Text style={{ fontSize: 14, color: Color.cloudyGrey, fontFamily: Mulish.Medium, letterSpacing: 0.5, paddingVertical: 10 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ante sapien.</Text>
+                </View>
                 <View style={[styles.NumberBoxConatiner, { marginVertical: 10 }]}>
                     <View style={{ flexDirection: 'row', padding: 10, justifyContent: 'center', alignItems: 'center', marginHorizontal: 10 }}>
                         <Iconviewcomponent
                             viewstyle={{ alignItems: 'center', justifyContent: 'center' }}
                             Icontag="AntDesign"
-                            icon_size={24}
+                            icon_size={22}
                             icon_color={Color.grey}
                             iconname="user"
                         />
@@ -270,7 +272,7 @@ const Register = () => {
                         <Iconviewcomponent
                             viewstyle={{ alignItems: 'center', justifyContent: 'center' }}
                             Icontag="MaterialCommunityIcons"
-                            icon_size={24}
+                            icon_size={22}
                             icon_color={Color.grey}
                             iconname="email-outline"
                         />
@@ -302,12 +304,12 @@ const Register = () => {
                 ) : null}
 
                 <View style={[styles.NumberBoxConatiner, { marginVertical: 10 }]}>
-                    <View style={{ flexDirection: 'row', padding: 10, justifyContent: 'center', alignItems: 'center', marginHorizontal: 10 }}>
+                    <View style={{ flexDirection: 'row', padding: 5, justifyContent: 'center', alignItems: 'center', marginHorizontal: 5 }}>
                         <Image
                             source={require('../../assets/Images/india.png')}
                             style={{ width: 20, height: 20, resizeMode: 'contain' }}
                         />
-                        <Text style={[styles.numberCountryCode, { paddingHorizontal: 10 }]}>+91</Text>
+                        <Text style={[styles.numberCountryCode, { paddingHorizontal: 5 }]}>+91</Text>
                     </View>
                     <TextInput
                         placeholder="Enter Your Mobile Number *"
@@ -329,13 +331,13 @@ const Register = () => {
                         <Iconviewcomponent
                             viewstyle={{ alignItems: 'center', justifyContent: 'center' }}
                             Icontag="Fontisto"
-                            icon_size={24}
+                            icon_size={18}
                             icon_color={Color.grey}
                             iconname="date"
                         />
                     </View>
                     <TouchableOpacity onPress={showDatePicker}>
-                        <Text style={{ fontSize: 16, color: Color.black, fontFamily: Mulish.SemiBold }}>{formatDate(date)}</Text>
+                        <Text style={{ fontSize: 14, color: Color.black, fontFamily: Mulish.SemiBold }}>{formatDate(date)}</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -353,11 +355,11 @@ const Register = () => {
                     <View style={{ flexDirection: 'row', padding: 10, justifyContent: 'center', alignItems: 'center', marginHorizontal: 10 }}>
                         <Image
                             source={require('../../assets/Images/gender.png')}
-                            style={{ width: 20, height: 20, resizeMode: 'contain' }}
+                            style={{ width: 18, height: 18, resizeMode: 'contain' }}
                         />
                     </View>
                     <View >
-                        <Text style={{ fontSize: 16, color: Color.black, fontFamily: Mulish.SemiBold }}>{selectGender}</Text>
+                        <Text style={{ fontSize: 14, color: Color.black, fontFamily: Mulish.SemiBold }}>{selectGender}</Text>
                     </View>
                 </TouchableOpacity>
 
@@ -370,7 +372,7 @@ const Register = () => {
                                 <Iconviewcomponent
                                     viewstyle={{ alignItems: 'center', justifyContent: 'center' }}
                                     Icontag="MaterialCommunityIcons"
-                                    icon_size={24}
+                                    icon_size={22}
                                     icon_color={Color.grey}
                                     iconname={!password_visible ? 'eye-off' : 'eye'}
                                 />
@@ -408,27 +410,27 @@ const Register = () => {
 
                 <View style={{ width: '95%', alignItems: 'center', padding: 5 }}>
                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                        <Text style={{ fontSize: 14, color: Color.cloudyGrey, fontFamily: Mulish.Medium, letterSpacing: 0.5 }}>By signing up, you agree to our </Text>
+                        <Text style={{ textAlign: 'justify', fontSize: 12, color: Color.cloudyGrey, fontFamily: Mulish.Medium }}>By signing up, you agree to our </Text>
                         <TouchableOpacity>
-                            <Text style={{ fontSize: 16, color: Color.black, fontFamily: Mulish.SemiBold, letterSpacing: 0.5 }}>Terms & Conditions </Text>
+                            <Text style={{ textAlign: 'justify', fontSize: 14, color: Color.black, fontFamily: Mulish.SemiBold }}>Terms & Conditions </Text>
                         </TouchableOpacity>
                     </View>
                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingVertical: 3 }}>
-                        <Text style={{ fontSize: 14, color: Color.cloudyGrey, fontFamily: Mulish.Medium, letterSpacing: 0.5 }}> and </Text>
+                        <Text style={{ textAlign: 'justify', fontSize: 12, color: Color.cloudyGrey, fontFamily: Mulish.Medium }}> and </Text>
                         <TouchableOpacity>
-                            <Text style={{ fontSize: 16, color: Color.black, fontFamily: Mulish.SemiBold, letterSpacing: 0.5 }}> Privacy Policy</Text>
+                            <Text style={{ textAlign: 'justify', fontSize: 14, color: Color.black, fontFamily: Mulish.SemiBold }}> Privacy Policy</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
 
-                <TouchableOpacity onPress={() => registerClick()} style={{ width: '100%', height: 55, justifyContent: 'center', alignItems: 'center', backgroundColor: Color.primary, borderRadius: 30, marginVertical: 20 }}>
-                    <Text style={{ fontSize: 20, color: Color.white, fontFamily: Mulish.SemiBold }}>Get Started</Text>
+                <TouchableOpacity onPress={() => registerClick()} style={{ width: '100%', height: 50, justifyContent: 'center', alignItems: 'center', backgroundColor: Color.primary, borderRadius: 30, marginVertical: 20 }}>
+                    <Text style={{ fontSize: 16, color: Color.white, fontFamily: Mulish.SemiBold }}>Get Started</Text>
                 </TouchableOpacity>
 
                 <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginVertical: 10 }}>
-                    <Text style={{ fontSize: 18, color: Color.Venus, fontFamily: Mulish.Medium, paddingHorizontal: 5 }}>Already have an account?  </Text>
+                    <Text style={{ fontSize: 16, color: Color.Venus, fontFamily: Mulish.Medium, paddingHorizontal: 5 }}>Already have an account?  </Text>
                     <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-                        <Text style={{ fontSize: 20, color: Color.primary, fontFamily: Mulish.SemiBold }}>Log in</Text>
+                        <Text style={{ fontSize: 18, color: Color.primary, fontFamily: Mulish.SemiBold }}>Log in</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -446,22 +448,22 @@ const styles = StyleSheet.create({
         backgroundColor: Color.white,
     },
     image: {
-        width: 160, height: 80, resizeMode: 'contain'
+        width: 180, height: 60, resizeMode: 'cover'
     },
     NumberBoxConatiner: {
         width: '100%',
         display: "flex",
         borderColor: Color.grey,
         borderWidth: 1,
-        height: 55,
+        height: 50,
         flexDirection: 'row',
         alignItems: 'center',
         borderRadius: 5,
     },
     numberCountryCode: {
         color: Color.cloudyGrey,
-        fontSize: 16,
-        fontFamily: Mulish.SemiBold,
+        fontSize: 14,
+        fontFamily: Mulish.Medium,
         textAlign: 'center',
         alignItems: 'center',
         // padding: 10,
@@ -476,11 +478,11 @@ const styles = StyleSheet.create({
     numberTextBox: {
         flex: 1,
         display: 'flex',
-        height: 55,
+        height: 50,
         // borderLeftColor: Color.grey,
         // borderLeftWidth: 1,
         color: Color.black,
-        fontSize: 16,
+        fontSize: 14,
         padding: 5,
         paddingTop: 5,
         paddingHorizontal: 10,
@@ -493,11 +495,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     header: {
-        fontSize: 24,
-        fontWeight: Mulish.Black,
+        fontSize: 22,
+        fontWeight: Mulish.SemiBold,
         color: Color.black,
         textAlign: 'left',
-        paddingHorizontal: 10
     },
     input: {
         height: 50,

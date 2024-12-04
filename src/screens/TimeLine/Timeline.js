@@ -84,7 +84,7 @@ const Timeline = () => {
                     <Iconviewcomponent
                         viewstyle={{ alignItems: 'center', justifyContent: 'center' }}
                         Icontag="Ionicons"
-                        icon_size={30}
+                        icon_size={26}
                         icon_color={Color.black}
                         iconname="chevron-back"
                     />
@@ -110,7 +110,7 @@ const Timeline = () => {
                     <Iconviewcomponent
                         viewstyle={{ alignItems: 'center', justifyContent: 'center' }}
                         Icontag="Ionicons"
-                        icon_size={30}
+                        icon_size={25}
                         icon_color={Color.black}
                         iconname="notifications-outline"
                     />
@@ -124,7 +124,7 @@ const Timeline = () => {
 
                     <View
                         style={{
-                            width: '95%', marginVertical: 10
+                            width: scr_width - 50,
                             // height: scr_height / 2 + 150,
                         }}>
 
@@ -138,7 +138,7 @@ const Timeline = () => {
                                         justifyContent: 'flex-start',
                                         alignItems: 'flex-start',
                                         padding: 5,
-                                        paddingVertical: 20,
+                                        paddingVertical: 15,
                                     }}
                                     key={index} // Use key for React list rendering
                                 >
@@ -146,7 +146,7 @@ const Timeline = () => {
                                         style={{
                                             textAlign: 'left',
                                             paddingVertical: 5,
-                                            fontSize: 18,
+                                            fontSize: 16,
                                             color: Color.black,
                                             fontFamily: Mulish.SemiBold,
                                             letterSpacing: 0.5,
@@ -157,7 +157,7 @@ const Timeline = () => {
                                     <Text
                                         style={{
                                             textAlign: 'justify',
-                                            fontSize: 14,
+                                            fontSize: 13,
                                             color: Color.cloudyGrey,
                                             fontFamily: Mulish.Medium,
                                             letterSpacing: 0.5,
@@ -221,21 +221,28 @@ const Timeline = () => {
                                     );
                                 }
                             }}
-
                         />
                     </View>
 
-                    <View style={{ width: '100%', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                        <Image
-                            source={require('../../assets/Images/offer.png')}
-                            style={{ width: '100%', height: 200, resizeMode: 'contain' }}
-                        />
-                    </View>
-                    <View style={{ width: '100%', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                        <Image
-                            source={require('../../assets/Images/offer.png')}
-                            style={{ width: '100%', height: 200, resizeMode: 'contain' }}
-                        />
+                    <View style={{ width: '100%', justifyContent: 'center', alignItems: 'center', marginVertical: 10, marginBottom: 100 }}>
+                        <ImageBackground
+                            source={require('../../assets/Gallery/road.png')}
+                            style={{ width: scr_width - 30, height: 180, resizeMode: 'contain', justifyContent: 'center', alignItems: 'center', borderRadius: 10 }}
+                        >
+                            <View style={{ flex: 1, width: '100%', position: 'absolute', justifyContent: 'center', alignItems: 'flex-start', borderRadius: 10 }}>
+                                <Text style={{ fontSize: 18, color: Color.white, fontFamily: Mulish.SemiBold, marginHorizontal: 20, letterSpacing: 0.5 }}>Go Premium</Text>
+                                <Text style={{ fontSize: 18, color: Color.white, fontFamily: Mulish.SemiBold, marginHorizontal: 20, letterSpacing: 0.5 }}>For Extra Benefits!</Text>
+
+                                <View style={{ flexDirection: 'row', alignItems: 'center', marginHorizontal: 20, paddingVertical: 5 }}>
+                                    <Text style={{ fontSize: 12, color: '#F5F5F5', fontFamily: Mulish.Medium, letterSpacing: 0.5 }}>Lorem ipsum dolor sit amet</Text>
+                                </View>
+                                <View style={{ width: '100%', paddingHorizontal: 10, marginTop: 20 }}>
+                                    <TouchableOpacity style={{ width: '50%', height: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: Color.white, borderRadius: 5 }}>
+                                        <Text style={{ fontSize: 16, color: Color.black, fontFamily: Mulish.SemiBold }}>See Plans</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </ImageBackground>
                     </View>
                 </ScrollView>
             </View>
@@ -247,10 +254,12 @@ const Timeline = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        height: 'auto',
         alignItems: 'center',
         backgroundColor: Color.white,
     },
     scrollContent: {
+        height: 'auto',
         padding: 10,
         justifyContent: 'center',
     },

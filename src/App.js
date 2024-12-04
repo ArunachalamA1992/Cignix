@@ -27,6 +27,9 @@ import ContactUs from './screens/SideMenu/ContactUs';
 import Profile from './screens/ProfileTab/Profile';
 import Color from './Global/Color';
 import Store from './Redux/Store';
+import NotificationsList from './screens/Home/NotificationsList';
+import Icon from 'react-native-vector-icons/Ionicons';
+import SimTest from './screens/Auth/SimTest';
 
 
 const Stack = createStackNavigator();
@@ -117,6 +120,12 @@ const MainApp = () => {
         />
 
         <Stack.Screen
+          name="SimTest"
+          component={SimTest}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
           name="TermsandConditions"
           component={TermsandConditions}
           options={({ navigation, route }) => ({
@@ -187,6 +196,30 @@ const MainApp = () => {
           component={ContactUs}
           options={({ navigation, route }) => ({
             headerTitle: 'Contact Us',
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              color: Color.black,
+              fontSize: 18,
+              // fontFamily: Manrope.Bold,
+            },
+            headerStyle: { backgroundColor: Color.white },
+            headerLeft: () => (
+              <View style={{ marginHorizontal: 10 }}>
+                <Icon
+                  name="arrow-back"
+                  size={30}
+                  color={Color.black}
+                  onPress={() => navigation.goBack()}
+                />
+              </View>
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="NotificationsList"
+          component={NotificationsList}
+          options={({ navigation, route }) => ({
+            headerTitle: 'Notifications List',
             headerTitleAlign: 'center',
             headerTitleStyle: {
               color: Color.black,

@@ -245,7 +245,7 @@ const OTPScreen = ({ route }) => {
                         <Text
                             style={{
                                 fontFamily: Mulish.SemiBold,
-                                fontSize: 20,
+                                fontSize: 18,
                                 fontWeight: 'bold',
                                 textAlign: 'center',
                                 color: Color.black,
@@ -258,7 +258,7 @@ const OTPScreen = ({ route }) => {
                             style={{
                                 fontSize: 14,
                                 color: Color.cloudyGrey,
-                                fontFamily: Mulish.Regular,
+                                fontFamily: Mulish.Medium,
                                 letterSpacing: 0.5,
                                 paddingTop: 10,
                                 textAlign: 'center',
@@ -268,7 +268,7 @@ const OTPScreen = ({ route }) => {
                                 style={{
                                     fontSize: 16,
                                     color: Color.lightBlack,
-                                    fontFamily: Mulish.Medium,
+                                    fontFamily: Mulish.SemiBold,
                                     letterSpacing: 0.5,
                                 }}>
                                 {isMobile(number) && countryCode?.mobile_prefix}
@@ -318,8 +318,8 @@ const OTPScreen = ({ route }) => {
                             loading={loading}
                         /> */}
 
-                        <TouchableOpacity onPress={() => VerifyOTP()} style={{ width: '95%', height: 55, justifyContent: 'center', alignItems: 'center', backgroundColor: Color.primary, borderRadius: 30, marginVertical: 20 }}>
-                            <Text style={{ fontSize: 20, color: Color.white, fontFamily: Mulish.SemiBold }}>Submit</Text>
+                        <TouchableOpacity onPress={() => VerifyOTP()} style={{ width: '100%', height: 50, justifyContent: 'center', alignItems: 'center', backgroundColor: Color.primary, borderRadius: 30, marginVertical: 20 }}>
+                            <Text style={{ fontSize: 16, color: Color.white, fontFamily: Mulish.SemiBold }}>Submit</Text>
                         </TouchableOpacity>
 
                     </View>
@@ -332,6 +332,7 @@ const OTPScreen = ({ route }) => {
 export default OTPScreen;
 const styles = StyleSheet.create({
     otpInputView: {
+        marginHorizontal: 0,
         marginVertical: 10,
         alignItems: 'center',
         justifyContent: 'center',
@@ -351,7 +352,7 @@ const styles = StyleSheet.create({
     },
     resendOtp: {
         color: Color.primary,
-        fontSize: 14,
+        fontSize: 13,
         fontFamily: Mulish.SemiBold,
         fontWeight: 'bold',
         textDecorationLine: 'underline',

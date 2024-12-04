@@ -21,6 +21,11 @@ import { scr_width } from './Components/Dimensions';
 import { Iconviewcomponent } from './Components/Icontag';
 import EmailPassword from './screens/Auth/EmailPassword';
 import Register from './screens/Auth/Register';
+import EditProfile from './screens/ProfileTab/EditProfile';
+import Membership from './screens/ProfileTab/Membership';
+import ChangePassword from './screens/ProfileTab/ChangePassword';
+import NotificationSettings from './screens/ProfileTab/NotificationSettings';
+import SimTest from './screens/Auth/SimTest';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -210,6 +215,105 @@ export const ProfileStack = () => {
       //   )
       // })}
       />
+      <Stack.Screen
+        name="EditProfile"
+        component={EditProfile}
+        // options={{ headerShown: false }}
+        options={({ navigation }) => ({
+          headerTitle: 'Edit Profile',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            color: Color.black,
+            fontSize: 22,
+          },
+          headerStyle: { backgroundColor: Color.white },
+          headerLeft: () => (
+            <View style={{ marginHorizontal: 10 }}>
+              <Icon
+                name="arrow-back"
+                size={30}
+                color={Color.black}
+                onPress={() => navigation.goBack()}
+              />
+            </View>
+          )
+        })}
+      />
+
+      <Stack.Screen
+        name="Membership"
+        component={Membership}
+        // options={{ headerShown: false }}
+        options={({ navigation }) => ({
+          headerTitle: 'Membership Plan',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            color: Color.black,
+            fontSize: 22,
+          },
+          headerStyle: { backgroundColor: Color.white },
+          headerLeft: () => (
+            <View style={{ marginHorizontal: 10 }}>
+              <Icon
+                name="arrow-back"
+                size={30}
+                color={Color.black}
+                onPress={() => navigation.goBack()}
+              />
+            </View>
+          )
+        })}
+      />
+      <Stack.Screen
+        name="ChangePassword"
+        component={ChangePassword}
+        // options={{ headerShown: false }}
+        options={({ navigation }) => ({
+          headerTitle: 'Change Password',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            color: Color.black,
+            fontSize: 22,
+          },
+          headerStyle: { backgroundColor: Color.white },
+          headerLeft: () => (
+            <View style={{ marginHorizontal: 10 }}>
+              <Icon
+                name="arrow-back"
+                size={30}
+                color={Color.black}
+                onPress={() => navigation.goBack()}
+              />
+            </View>
+          )
+        })}
+      />
+      <Stack.Screen
+        name="NotificationSettings"
+        component={NotificationSettings}
+        // options={{ headerShown: false }}
+        options={({ navigation }) => ({
+          headerTitle: 'Notification Settings',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            color: Color.black,
+            fontSize: 22,
+          },
+          headerStyle: { backgroundColor: Color.white },
+          headerLeft: () => (
+            <View style={{ marginHorizontal: 10 }}>
+              <Icon
+                name="arrow-back"
+                size={30}
+                color={Color.black}
+                onPress={() => navigation.goBack()}
+              />
+            </View>
+          )
+        })}
+      />
+
+
     </Stack.Navigator>
   );
 };
@@ -235,6 +339,11 @@ export const Auth = () => {
       <Stack.Screen
         name="Register"
         component={Register}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Simtest"
+        component={SimTest}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

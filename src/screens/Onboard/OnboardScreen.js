@@ -34,7 +34,7 @@ const OnboardScreen = () => {
                         <Text style={{ width: '95%', textAlign: 'center', fontSize: 36, color: Color.white, fontFamily: Mulish.Bold, letterSpacing: 0.5 }}>Step Into Your Tobacco-Free Future</Text>
                         <Text style={{ width: '95%', textAlign: 'center', fontSize: 16, color: Color.grey, fontFamily: Mulish.Medium, paddingVertical: 15, letterSpacing: 0.5 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ante sapien.</Text>
 
-                        <TouchableOpacity style={{ width: '90%', height: 50, justifyContent: 'center', alignItems: 'center', backgroundColor: Color.primary, borderRadius: 30 }}>
+                        <TouchableOpacity onPress={() => navigation.navigate("SimTest")} style={{ width: '90%', height: 50, justifyContent: 'center', alignItems: 'center', backgroundColor: Color.primary, borderRadius: 30 }}>
                             <Text style={{ fontSize: 14, color: Color.white, fontFamily: Mulish.SemiBold }}>Get Started</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => navigation.navigate("Auth")}

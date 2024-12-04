@@ -119,19 +119,19 @@ const Login = () => {
                 <View style={{ width: scr_width, height: scr_height, justifyContent: 'center', alignItems: 'center' }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}></View>
                     <View style={{ flex: 4, width: '100%', justifyContent: 'flex-start', alignItems: 'center' }}>
-                        <View style={{ width: '100%', justifyContent: 'flex-start', alignItems: 'flex-start', paddingHorizontal: 20 }}>
+                        <View style={{ width: '100%', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
                             <Image
-                                source={require('../../assets/Logos/cignix_black.png')}
+                                source={require('../../assets/Logos/cignix_main.png')}
                                 style={[styles.image]}
                             />
                         </View>
                         <View style={{ width: '100%', justifyContent: 'flex-start', alignItems: 'flex-start', paddingHorizontal: 20 }}>
-                            <Text style={{ fontSize: 30, color: Color.black, fontFamily: Mulish.Bold, paddingVertical: 5 }}>Welcome Back,</Text>
-                            <Text style={{ fontSize: 16, color: Color.cloudyGrey, fontFamily: Mulish.Medium }}>Login with your Mobile Number</Text>
+                            <Text style={{ fontSize: 26, color: Color.black, fontFamily: Mulish.Bold, paddingVertical: 5 }}>Welcome Back,</Text>
+                            <Text style={{ fontSize: 14, color: Color.cloudyGrey, fontFamily: Mulish.Medium }}>Login with your Mobile Number</Text>
 
                             <View style={{ marginVertical: 20 }}>
                                 <View style={styles.NumberBoxConatiner}>
-                                    <View style={{ flexDirection: 'row', padding: 10, justifyContent: 'center', alignItems: 'center', marginHorizontal: 10 }}>
+                                    <View style={{ flexDirection: 'row', padding: 5, justifyContent: 'center', alignItems: 'center' }}>
                                         <Image
                                             source={require('../../assets/Images/india.png')}
                                             style={{ width: 20, height: 20, resizeMode: 'contain' }}
@@ -140,7 +140,7 @@ const Login = () => {
                                     </View>
                                     <TextInput
                                         placeholder="Mobile Number"
-                                        placeholderTextColor={Color.black}
+                                        placeholderTextColor={Color.cloudyGrey}
                                         value={number}
                                         keyboardType="numeric"
                                         maxLength={10}
@@ -155,42 +155,42 @@ const Login = () => {
                                 {error && <Text style={styles.invalidLogin}>{error}</Text>}
                             </View>
 
-                            <TouchableOpacity onPress={() => login()} style={{ width: '100%', height: 55, justifyContent: 'center', alignItems: 'center', backgroundColor: Color.primary, borderRadius: 30, marginVertical: 20 }}>
-                                <Text style={{ fontSize: 20, color: Color.white, fontFamily: Mulish.SemiBold }}>Get OTP</Text>
+                            <TouchableOpacity onPress={() => login()} style={{ width: '100%', height: 50, justifyContent: 'center', alignItems: 'center', backgroundColor: Color.primary, borderRadius: 30, marginVertical: 10 }}>
+                                <Text style={{ fontSize: 16, color: Color.white, fontFamily: Mulish.SemiBold }}>Get OTP</Text>
                             </TouchableOpacity>
 
                             <View style={{ width: '95%', flexDirection: 'row', alignItems: 'center', marginVertical: 20 }}>
                                 <View style={{ width: '40%', height: 0.5, borderStyle: 'dashed', borderWidth: 0.5, backgroundColor: Color.softGrey, borderRadius: 1 }}></View>
                                 <View>
-                                    <Text style={{ fontSize: 14, color: Color.cloudyGrey, fontFamily: Mulish.Medium, paddingHorizontal: 5 }}>Or Login With</Text>
+                                    <Text style={{ fontSize: 12, color: Color.cloudyGrey, fontFamily: Mulish.Medium, paddingHorizontal: 5 }}>Or Login With</Text>
                                 </View>
                                 <View style={{ width: '40%', height: 0.5, borderStyle: 'dashed', borderWidth: 0.5, backgroundColor: Color.softGrey, borderRadius: 1 }}></View>
                             </View>
 
                             <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginVertical: 20 }}>
-                                <TouchableOpacity style={{ flex: 1, height: 55, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', borderRadius: 30, borderWidth: 1, borderColor: '#C5C5C5' }}>
+                                <TouchableOpacity style={{ flex: 1, height: 50, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', borderRadius: 30, borderWidth: 1, borderColor: '#C5C5C5' }}>
                                     <Image
                                         source={require('../../assets/Images/google.png')}
-                                        style={{ width: 25, height: 25, resizeMode: 'contain' }}
+                                        style={{ width: 20, height: 20, resizeMode: 'contain' }}
                                     />
-                                    <Text style={{ fontSize: 20, color: Color.cloudyGrey, fontFamily: Mulish.SemiBold, paddingHorizontal: 10 }}>Google</Text>
+                                    <Text style={{ fontSize: 16, color: Color.cloudyGrey, fontFamily: Mulish.SemiBold, paddingHorizontal: 10 }}>Google</Text>
                                 </TouchableOpacity>
                                 <View style={{ width: 20, height: '100%', backgroundColor: Color.white }}></View>
                                 <TouchableOpacity
                                     onPress={() => navigation.navigate("EmailPassword")}
-                                    style={{ flex: 1, height: 55, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', borderRadius: 30, borderWidth: 1, borderColor: '#C5C5C5' }}>
+                                    style={{ flex: 1, height: 50, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', borderRadius: 30, borderWidth: 1, borderColor: '#C5C5C5' }}>
                                     <Image
                                         source={require('../../assets/Images/pass.png')}
-                                        style={{ width: 25, height: 25, resizeMode: 'contain' }}
+                                        style={{ width: 20, height: 20, resizeMode: 'contain' }}
                                     />
-                                    <Text style={{ fontSize: 20, color: Color.cloudyGrey, fontFamily: Mulish.SemiBold, paddingHorizontal: 10 }}>Password</Text>
+                                    <Text style={{ fontSize: 16, color: Color.cloudyGrey, fontFamily: Mulish.SemiBold, paddingHorizontal: 10 }}>Password</Text>
                                 </TouchableOpacity>
                             </View>
 
                             <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
-                                <Text style={{ fontSize: 18, color: Color.Venus, fontFamily: Mulish.Medium, paddingHorizontal: 5 }}>Don’t have an account? </Text>
+                                <Text style={{ fontSize: 16, color: Color.Venus, fontFamily: Mulish.Medium, paddingHorizontal: 5 }}>Don’t have an account? </Text>
                                 <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-                                    <Text style={{ fontSize: 20, color: Color.primary, fontFamily: Mulish.SemiBold }}>Sign up</Text>
+                                    <Text style={{ fontSize: 18, color: Color.primary, fontFamily: Mulish.SemiBold }}>Sign up</Text>
                                 </TouchableOpacity>
                             </View>
 
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     image: {
-        width: 160, height: 80, resizeMode: 'contain'
+        width: 170, height: 80, resizeMode: 'contain'
     },
     NumberBoxConatiner: {
         width: '100%',
@@ -230,8 +230,8 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
     numberCountryCode: {
-        color: Color.black,
-        fontSize: 16,
+        color: Color.lightBlack,
+        fontSize: 12,
         fontFamily: Mulish.SemiBold,
         textAlign: 'center',
         alignItems: 'center',
@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
         fontFamily: Mulish.Light,
         color: Color.red,
         textAlign: 'left',
-        marginTop: 10,
+        marginTop: 5,
     },
     numberTextBox: {
         flex: 1,
@@ -251,7 +251,7 @@ const styles = StyleSheet.create({
         borderLeftColor: Color.grey,
         borderLeftWidth: 1,
         color: Color.black,
-        fontSize: 16,
+        fontSize: 14,
         padding: 5,
         paddingTop: 5,
         paddingHorizontal: 10,
