@@ -163,6 +163,12 @@ const MainApp = () => {
 
 
         <Stack.Screen
+          name="SimTest"
+          component={SimTest}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
           name="TermsandConditions"
           component={TermsandConditions}
           options={({ navigation, route }) => ({

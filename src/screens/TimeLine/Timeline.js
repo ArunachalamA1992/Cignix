@@ -122,7 +122,7 @@ const Timeline = () => {
                     <Iconviewcomponent
                         viewstyle={{ alignItems: 'center', justifyContent: 'center' }}
                         Icontag="Ionicons"
-                        icon_size={30}
+                        icon_size={26}
                         icon_color={Color.black}
                         iconname="chevron-back"
                     />
@@ -148,7 +148,7 @@ const Timeline = () => {
                     <Iconviewcomponent
                         viewstyle={{ alignItems: 'center', justifyContent: 'center' }}
                         Icontag="Ionicons"
-                        icon_size={30}
+                        icon_size={25}
                         icon_color={Color.black}
                         iconname="notifications-outline"
                     />
@@ -264,6 +264,7 @@ const styles = StyleSheet.create({
         backgroundColor: Color.white
     },
     scrollContent: {
+        height: 'auto',
         padding: 10,
         justifyContent: 'center',
     },

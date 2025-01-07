@@ -49,56 +49,27 @@ export const api = {
       })
       .catch(err => Promise.resolve(err));
   },
-  // PUT Method :
-  
-  // putMethod: (url, data, accessToken) => {
-  //   const headers = {
-  //     ...api.header(),
-  //   };
-  //   if (accessToken) {
-  //     headers.Authorization = `Bearer ${accessToken}`;
-  //   }
-  //   return fetch(baseUrl + url, {
-  //     method: 'PUT',
-  //     headers: headers,
-  //     body: JSON.stringify(data),
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       if (data) {
-  //         return data;
-  //       }
-  //     })
-  //     .catch(err => Promise.reject(err));
-  // },
+  // PUT Method
   putMethod: (url, data, accessToken) => {
     const headers = {
       ...api.header(),
     };
-  
     if (accessToken) {
       headers.Authorization = `Bearer ${accessToken}`;
     }
-  
-    // Remove 'Content-Type' header if sending FormData
-    if (data instanceof FormData) {
-      delete headers["Content-Type"];
-    }
-  
     return fetch(baseUrl + url, {
       method: 'PUT',
       headers: headers,
-      body: data instanceof FormData ? data : JSON.stringify(data), // Check if data is FormData
+      body: JSON.stringify(data),
     })
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         if (data) {
           return data;
         }
       })
-      .catch((err) => Promise.reject(err));
+      .catch(err => Promise.reject(err));
   },
-  
   // PUT Method in NOTIFICATION
   putMethodNotification: (url, accessToken) => {
     const headers = {

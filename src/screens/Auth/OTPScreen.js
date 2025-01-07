@@ -256,7 +256,7 @@ const OTPScreen = ({ route }) => {
                         <Text
                             style={{
                                 fontFamily: Mulish.SemiBold,
-                                fontSize: 20,
+                                fontSize: 18,
                                 fontWeight: 'bold',
                                 textAlign: 'center',
                                 color: Color.black,
@@ -269,7 +269,7 @@ const OTPScreen = ({ route }) => {
                             style={{
                                 fontSize: 14,
                                 color: Color.cloudyGrey,
-                                fontFamily: Mulish.Regular,
+                                fontFamily: Mulish.Medium,
                                 letterSpacing: 0.5,
                                 paddingTop: 10,
                                 textAlign: 'center',
@@ -279,7 +279,7 @@ const OTPScreen = ({ route }) => {
                                 style={{
                                     fontSize: 16,
                                     color: Color.lightBlack,
-                                    fontFamily: Mulish.Medium,
+                                    fontFamily: Mulish.SemiBold,
                                     letterSpacing: 0.5,
                                 }}>
                                 {isMobile(number) && countryCode?.mobile_prefix}
@@ -342,7 +342,6 @@ const OTPScreen = ({ route }) => {
                         /> */}
 
 
-
                     </View>
                 </View>
             </DismissKeyboard>
@@ -353,6 +352,7 @@ const OTPScreen = ({ route }) => {
 export default OTPScreen;
 const styles = StyleSheet.create({
     otpInputView: {
+        marginHorizontal: 0,
         marginVertical: 10,
         alignItems: 'center',
         justifyContent: 'center',

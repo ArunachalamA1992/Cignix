@@ -548,13 +548,13 @@ const Register = ({ navigation, route }) => {
                     <View style={{ width:scr_width/1.1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
                         <Text style={{ fontSize: 14, color: Color.cloudyGrey, fontFamily: Mulish.Medium, letterSpacing: 0.5 }}>By signing up, you agree to our </Text>
                         <TouchableOpacity>
-                            <Text style={{ fontSize: 16, color: Color.black, fontFamily: Mulish.SemiBold, letterSpacing: 0.5 }}>Terms & Conditions </Text>
+                            <Text style={{ textAlign: 'justify', fontSize: 14, color: Color.black, fontFamily: Mulish.SemiBold }}>Terms & Conditions </Text>
                         </TouchableOpacity>
                     </View>
                     <View style={{ width:scr_width/1.1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingVertical: 3 }}>
                         <Text style={{ fontSize: 14, color: Color.cloudyGrey, fontFamily: Mulish.Medium, letterSpacing: 0.5 }}> and </Text>
                         <TouchableOpacity>
-                            <Text style={{ fontSize: 16, color: Color.black, fontFamily: Mulish.SemiBold, letterSpacing: 0.5 }}> Privacy Policy</Text>
+                            <Text style={{ textAlign: 'justify', fontSize: 14, color: Color.black, fontFamily: Mulish.SemiBold }}> Privacy Policy</Text>
                         </TouchableOpacity>
                     </View>
                 </View> */}

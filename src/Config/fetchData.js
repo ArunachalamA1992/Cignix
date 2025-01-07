@@ -5,11 +5,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const AccessToken = async () => {
   try {
-    // console.log("1111");
     const ACCESS_TOKEN = await AsyncStorage.getItem('ACCESS_TOKEN');
-    if (ACCESS_TOKEN !== null) {
-      // console.log("444444444",ACCESS_TOKEN);     
-      return ACCESS_TOKEN;
+    const value = JSON.parse(ACCESS_TOKEN);
+    console.log('access token', value);
+    if (value !== null) {
+      return value;
     }
   } catch (e) {
     return e;
