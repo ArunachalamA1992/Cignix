@@ -13,13 +13,14 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import Icons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Color from '../Global/Color';
+import common_fn from './common_fn';
 
-// import Orientation from 'react-native-orientation';
+import Orientation from 'react-native-orientation-locker';
 
 const { width } = Dimensions.get('window');
 // import samplevideo from '../../assets/video/samplevideo.mp4';
 
-const Videoplayercomponent = ({ source, cancel }) => {
+const Videoplayercomponent = ({ source, cancel, onEnds ,Videoendfun,currentdata}) => {
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0.1);
     const [paused, setPaused] = useState(false);
@@ -28,7 +29,7 @@ const Videoplayercomponent = ({ source, cancel }) => {
     const [fullscreen, setFullscreen] = useState(false);
 
     const videoRef = useRef(null);
-
+  const overlayTimer = useRef(null);
     const lastTap = useRef(null);
 
     const handleDoubleTap = (doubleTapCallback, singleTapCallback) => {
@@ -54,14 +55,23 @@ const Videoplayercomponent = ({ source, cancel }) => {
     };
 
     const load = ({ duration }) => {
-        setDuration(duration), setLoader(false), console.log('loaded', duration);
+        setDuration(duration), setLoader(false),
+        setPaused(!paused);
     };
+    
     const progress = ({ currentTime }) => {
-        console.log('currentTime', currentTime);
+        console.log('currentdata', currentdata?.status);
         console.log('duration', duration);
         setCurrentTime(currentTime);
         if (Math.round(currentTime) === Math.round(duration - 0.025)) {
             console.log('Video has ended');
+            if (currentdata?.status !== 'completed') {
+                        // console.log("Data has",currentdata);
+                        Videoendfun(currentdata);
+                    }else{
+                        console.log("Video Already apply a Feedback",currentdata);
+                        // Videoendfun(currentdata);
+                    }
             setPaused(!paused);
             setCurrentTime(0);
             videoRef.current.seek(0);
@@ -69,15 +79,19 @@ const Videoplayercomponent = ({ source, cancel }) => {
     };
 
     const backward = () => {
-        videoRef.current.seek(currentTime - 5);
-        clearTimeout(timer);
-        overlayTimer = setTimeout(() => setOverlay(false), 3000);
+        if(Math.round(currentTime) >= 5 )
+        {
+            videoRef.current.seek(currentTime - 5);
+            clearTimeout(timer);
+            overlayTimer = setTimeout(() => setOverlay(false), 3000);
+        }else{
+             common_fn?.showToast("You can't go backward");
+        }
+        
     };
 
     const forward = () => {
-        videoRef.current.seek(currentTime + 5);
-        clearTimeout(overlayTimer);
-        overlayTimer = setTimeout(() => setOverlay(false), 3000);
+        common_fn?.showToast("You can't go forward");
     };
 
     const onslide = slide => {
@@ -112,6 +126,8 @@ const Videoplayercomponent = ({ source, cancel }) => {
 
     const handleFullscreen = () => {
         const newFullscreen = !fullscreen;
+        console.log("newFullscreen", newFullscreen);
+        
         if (newFullscreen) {
             Orientation.lockToLandscape();
         } else {
@@ -140,14 +156,31 @@ const Videoplayercomponent = ({ source, cancel }) => {
                     resizeMode="cover"
                     onLoad={load}
                     onProgress={progress}
+                    // onEnd={text => {
+                    //     if (currentdata?.status !== 'completed') {
+                    //         console.log("Data",currentdata);
+                            
+                    //         Videoendfun(currentdata);
+                    //     }
+                    //     console.log("G  Video has ended");
+                        
+                    //   }}
                 />
 
                 {!loader ? (
                     <View style={style.overlay}>
                         {overlay ? (
                             <View style={{ ...style.overlaySet, backgroundColor: '#0006' }}>
+                                {/* {
+                                    Math.round(currentTime) > 5 ? (
+                                        <Icons name="replay-5" style={style.icon} onPress={backward} />
+                                    ):null
+                                } */}
                                 <Icons name="replay-5" style={style.icon} onPress={backward} />
-
+                                {
+                                    console.log("duration",Math.round(duration))
+                                    
+                                }
                                 <Icon
                                     name={paused ? 'play' : 'pause'}
                                     style={style.icon}
@@ -161,11 +194,13 @@ const Videoplayercomponent = ({ source, cancel }) => {
                                         <Text style={{ color: 'white' }}>{getTime(currentTime)}</Text>
                                         <Text style={{ color: 'white' }}>
                                             {getTime(duration)}{' '}
-                                            {/* <Icon
-                      // onPress={handleFullscreen}
+                                            <TouchableOpacity style={{ marginLeft: 5 }} onPress={handleFullscreen}>
+                                            <Icon
+                    //   onPress={handleFullscreen}
                       name={fullscreen ? 'compress' : 'expand'}
-                      style={{ fontSize: 15 }}
-                    /> */}
+                      style={{ fontSize: 15,marginLeft:5,zindex:100,color:'white' }}
+                    />
+                                            </TouchableOpacity>
                                         </Text>
                                     </View>
                                     {/* <Slider
@@ -179,10 +214,20 @@ const Videoplayercomponent = ({ source, cancel }) => {
                             </View>
                         ) : (
                             <View style={style.overlaySet}>
-                                <TouchableNativeFeedback onPress={youtubeSeekLeft}>
+                                <TouchableNativeFeedback onPress={()=>{
+                                 setOverlay(true),
+                                 setTimeout(() => {
+                                    setOverlay(false);
+                                 }, 3000);
+                                }}>
                                     <View style={{ flex: 1 }} />
                                 </TouchableNativeFeedback>
-                                <TouchableNativeFeedback onPress={youtubeSeekRight}>
+                                <TouchableNativeFeedback onPress={()=>{
+                                 setOverlay(true),
+                                 setTimeout(() => {
+                                    setOverlay(false);
+                                 }, 3000);
+                                }}>
                                     <View style={{ flex: 1 }} />
                                 </TouchableNativeFeedback>
                             </View>
@@ -236,7 +281,7 @@ const style = StyleSheet.create({
         justifyContent: 'space-between',
         paddingHorizontal: 5,
     },
-    video: { width, height: width * 0.76666, backgroundColor: 'black' },
+    video: {  ...StyleSheet.absoluteFillObject},
     fullscreenVideo: {
         backgroundColor: 'black',
         ...StyleSheet.absoluteFill,

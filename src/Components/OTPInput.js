@@ -64,7 +64,7 @@ const OTPInput = ({
     );
   };
   useEffect(() => {
-    if (code.length === 4) {
+    if (code.length === 6) {
       Keyboard.dismiss();
     }
   }, [code.length]);
@@ -101,10 +101,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     padding: 12,
-    minWidth: 60,
-    height: 60,
+    minWidth: 55,
+    height: 55,
+    marginRight:4,
     justifyContent: 'center',
-    marginHorizontal: 20,
+    // marginHorizontal: 20,
   },
   BoxInputValue: {
     fontSize: 18,

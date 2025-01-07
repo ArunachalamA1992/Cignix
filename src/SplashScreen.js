@@ -11,6 +11,8 @@ import { useDispatch } from 'react-redux';
 import Color from './Global/Color';
 import { useNavigation } from '@react-navigation/native';
 // import { SvgUri } from 'react-native-svg';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 // create a component
 const SplashScreen = () => {
@@ -18,13 +20,27 @@ const SplashScreen = () => {
     const dispatch = useDispatch();
     const navigation = useNavigation();
     const [loading, setLoading] = useState(false);
-
+    const GetUserdata = async()=>{
+        try {
+            const ACCESS_TOKEN = await AsyncStorage.getItem('ACCESS_TOKEN');
+           if((ACCESS_TOKEN !== null)){
+            navigation.replace("Tab")
+           }else{
+            navigation.replace("OnboardScreen")
+           }
+       
+        } catch (error) {
+            console.log('catch in splash_Screen ', error);  
+        }
+    }
     useEffect(() => {
         try {
             const SplashLoad = setTimeout(() => {
                 // getloginData();
                 // getUserData();
-                navigation.navigate("OnboardScreen")
+                // navigation.navigate("OnboardScreen")
+                // navigation.navigate("Tab")
+                GetUserdata();
                 console.log("******************* LOADING ********************");
 
             }, 3000);

@@ -27,6 +27,18 @@ import ContactUs from './screens/SideMenu/ContactUs';
 import Profile from './screens/ProfileTab/Profile';
 import Color from './Global/Color';
 import Store from './Redux/Store';
+import NotificationsList from './screens/Home/NotificationsList';
+import Icon from 'react-native-vector-icons/Ionicons';
+import SimTest from './screens/Auth/SimTest';
+import SimTestScreen from './screens/Home/SimTestScreen';
+import SuccesScreen from './screens/Auth/SuccesScreen';
+import HelpCenter from './screens/SideMenu/HelpCenter';
+import GetStarted from './screens/SideMenu/GetStarted';
+import PricePayments from './screens/SideMenu/PricePayments';
+import TechnicalSupport from './screens/SideMenu/TechnicalSupport';
+import FAQs from './screens/SideMenu/FAQs';
+import MainStack from './screens/Navigation/navigation';
+import { UserProvider } from './screens/Context/userContext';
 
 
 const Stack = createStackNavigator();
@@ -61,7 +73,24 @@ const MyDrawer = () => {
 const App = () => {
   return (
     <Provider store={Store}>
-      <MyDrawer />
+      <UserProvider>
+      <NavigationContainer>
+      <LinearGradient
+        style={{
+          height: StatusBar.currentHeight,
+        }}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        colors={['#0D71BA', '#2994CB', '#0D71BA']}
+      />
+      <StatusBar
+        backgroundColor="transparent"
+        barStyle={'light-content'}
+        translucent
+      />
+      <MainStack/>
+      </NavigationContainer>
+      </UserProvider>
     </Provider>
   );
 };
@@ -115,6 +144,23 @@ const MainApp = () => {
           component={TabNavigator}
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+      name='SimTestScreen'
+      component={SimTestScreen}
+      options={{ headerShown: false }}
+     />
+
+        <Stack.Screen
+          name="SimTest"
+          component={SimTest}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SuccesScreen"
+          component={SuccesScreen}
+          options={{ headerShown: false }}
+        />
+
 
         <Stack.Screen
           name="TermsandConditions"
@@ -187,6 +233,150 @@ const MainApp = () => {
           component={ContactUs}
           options={({ navigation, route }) => ({
             headerTitle: 'Contact Us',
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              color: Color.black,
+              fontSize: 18,
+              // fontFamily: Manrope.Bold,
+            },
+            headerStyle: { backgroundColor: Color.white },
+            headerLeft: () => (
+              <View style={{ marginHorizontal: 10 }}>
+                <Icon
+                  name="arrow-back"
+                  size={30}
+                  color={Color.black}
+                  onPress={() => navigation.goBack()}
+                />
+              </View>
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="NotificationsList"
+          component={NotificationsList}
+          options={({ navigation, route }) => ({
+            headerTitle: 'Notifications List',
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              color: Color.black,
+              fontSize: 18,
+              // fontFamily: Manrope.Bold,
+            },
+            headerStyle: { backgroundColor: Color.white },
+            headerLeft: () => (
+              <View style={{ marginHorizontal: 10 }}>
+                <Icon
+                  name="arrow-back"
+                  size={30}
+                  color={Color.black}
+                  onPress={() => navigation.goBack()}
+                />
+              </View>
+            ),
+          })}
+        />
+         <Stack.Screen
+          name="HelpCenter"
+          component={HelpCenter}
+          options={({ navigation, route }) => ({
+            headerTitle: 'Help Center',
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              color: Color.black,
+              fontSize: 18,
+              // fontFamily: Manrope.Bold,
+            },
+            headerStyle: { backgroundColor: Color.white },
+            headerLeft: () => (
+              <View style={{ marginHorizontal: 10 }}>
+                <Icon
+                  name="arrow-back"
+                  size={30}
+                  color={Color.black}
+                  onPress={() => navigation.goBack()}
+                />
+              </View>
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="GetStarted"
+          component={GetStarted}
+          options={({ navigation, route }) => ({
+            headerTitle: 'Get Started',
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              color: Color.black,
+              fontSize: 18,
+              // fontFamily: Manrope.Bold,
+            },
+            headerStyle: { backgroundColor: Color.white },
+            headerLeft: () => (
+              <View style={{ marginHorizontal: 10 }}>
+                <Icon
+                  name="arrow-back"
+                  size={30}
+                  color={Color.black}
+                  onPress={() => navigation.goBack()}
+                />
+              </View>
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="PricePayments"
+          component={PricePayments}
+          options={({ navigation, route }) => ({
+            headerTitle: 'Price & Payments',
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              color: Color.black,
+              fontSize: 18,
+              // fontFamily: Manrope.Bold,
+            },
+            headerStyle: { backgroundColor: Color.white },
+            headerLeft: () => (
+              <View style={{ marginHorizontal: 10 }}>
+                <Icon
+                  name="arrow-back"
+                  size={30}
+                  color={Color.black}
+                  onPress={() => navigation.goBack()}
+                />
+              </View>
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="TechnicalSupport"
+          component={TechnicalSupport}
+          options={({ navigation, route }) => ({
+            headerTitle: 'Technical Support',
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              color: Color.black,
+              fontSize: 18,
+              // fontFamily: Manrope.Bold,
+            },
+            headerStyle: { backgroundColor: Color.white },
+            headerLeft: () => (
+              <View style={{ marginHorizontal: 10 }}>
+                <Icon
+                  name="arrow-back"
+                  size={30}
+                  color={Color.black}
+                  onPress={() => navigation.goBack()}
+                />
+              </View>
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="FAQs"
+          component={FAQs}
+          options={({ navigation, route }) => ({
+            headerTitle: 'FAQs',
             headerTitleAlign: 'center',
             headerTitleStyle: {
               color: Color.black,
