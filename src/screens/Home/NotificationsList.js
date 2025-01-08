@@ -33,63 +33,63 @@ const NotificationsList = () => {
     const [notificationData, setNotificationData] = useState([
         {
             'id': '0',
-            'notify_Image': require('../../assets/Logos/cignix_white.png'),
+            'notify_Image': require('../../assets/Logos/cignix.png'),
             'notify_Title': `You're making progress!`,
             'notify_sub': 'Only 2 more videos to unlock your next SIM Test.',
             'read': false, // New property
         },
         {
             'id': '1',
-            'notify_Image': require('../../assets/Logos/cignix_black.png'),
+            'notify_Image': require('../../assets/Logos/cignix.png'),
             'notify_Title': `Scores Improved!`,
             'notify_sub': 'Your score improved by 15%! Keep up the good work!',
             'read': false, // New property
         },
         {
             'id': '2',
-            'notify_Image': require('../../assets/Logos/cignix_black.png'),
+            'notify_Image': require('../../assets/Logos/cignix.png'),
             'notify_Title': `Don't forget !`,
             'notify_sub': 'To watch today’s videoStay on track with your journey.',
             'read': false, // New property
         },
         {
             'id': '3',
-            'notify_Image': require('../../assets/Logos/cignix_black.png'),
+            'notify_Image': require('../../assets/Logos/cignix.png'),
             'notify_Title': `Scores Improved!`,
             'notify_sub': 'Your score improved by 15%! Keep up the good work!',
             'read': false, // New property
         },
         {
             'id': '4',
-            'notify_Image': require('../../assets/Logos/cignix_black.png'),
+            'notify_Image': require('../../assets/Logos/cignix.png'),
             'notify_Title': `Don't forget !`,
             'notify_sub': 'To watch today’s videoStay on track with your journey.',
             'read': false, // New property
         },
         {
             'id': '5',
-            'notify_Image': require('../../assets/Logos/cignix_black.png'),
+            'notify_Image': require('../../assets/Logos/cignix.png'),
             'notify_Title': `Scores Improved!`,
             'notify_sub': 'Your score improved by 15%! Keep up the good work!',
             'read': false, // New property
         },
         {
             'id': '6',
-            'notify_Image': require('../../assets/Logos/cignix_black.png'),
+            'notify_Image': require('../../assets/Logos/cignix.png'),
             'notify_Title': `Don't forget !`,
             'notify_sub': 'To watch today’s videoStay on track with your journey.',
             'read': false, // New property
         },
         {
             'id': '7',
-            'notify_Image': require('../../assets/Logos/cignix_black.png'),
+            'notify_Image': require('../../assets/Logos/cignix.png'),
             'notify_Title': `Scores Improved!`,
             'notify_sub': 'Your score improved by 15%! Keep up the good work!',
             'read': false, // New property
         },
         {
             'id': '8',
-            'notify_Image': require('../../assets/Logos/cignix_black.png'),
+            'notify_Image': require('../../assets/Logos/cignix.png'),
             'notify_Title': `Don't forget !`,
             'notify_sub': 'To watch today’s videoStay on track with your journey.',
             'read': false, // New property

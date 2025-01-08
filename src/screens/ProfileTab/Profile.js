@@ -108,7 +108,7 @@ const Profile = ({ navigation }) => {
         </View>
         <TouchableOpacity
           style={{ marginHorizontal: 10 }}
-          onPress={() => navigation.navigate('notification')}>
+          onPress={() => navigation.navigate('NotificationsList')}>
           <View style={{ position: 'absolute', zIndex: 999, top: -5, right: -5 }}>
             <Badge
               badgeStyle={{

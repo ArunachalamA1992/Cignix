@@ -132,11 +132,10 @@ const EditProfile = ({ navigation }) => {
             navigation?.goBack();
           }}>
           <Iconviewcomponent
-            // viewstyle={{ alignItems: 'center', justifyContent: 'center' }}
-            Icontag="AntDesign"
+            Icontag="Ionicons"
             icon_size={25}
             icon_color={'#000'}
-            iconname={'left'}
+            iconname={'chevron-back'}
           />
         </Pressable>
         <View>

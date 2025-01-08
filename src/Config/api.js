@@ -1,4 +1,4 @@
-import {baseUrl} from './base_url';
+import { baseUrl } from './base_url';
 export const api = {
   header: () => {
     return {
@@ -32,6 +32,7 @@ export const api = {
     const headers = {
       ...api.header(),
     };
+    console.log('token ===== ', accessToken);
     if (accessToken) {
       headers.Authorization = `Bearer ${accessToken}`;
     }
@@ -43,6 +44,8 @@ export const api = {
     })
       .then(res => res.json())
       .then(datas => {
+        console.log("datas ------------- :", datas);
+
         if (datas) {
           return datas;
         }

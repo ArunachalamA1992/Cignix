@@ -1,5 +1,5 @@
 //import liraries
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, {useState, useEffect, useCallback, useRef} from 'react';
 import {
   StyleSheet,
   Text,
@@ -24,13 +24,13 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import Color from '../../Global/Color';
-import { Iconviewcomponent } from '../../Components/Icontag';
-import { Mulish } from '../../Global/FontFamily';
-import { Badge } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
+import {Iconviewcomponent} from '../../Components/Icontag';
+import {Mulish} from '../../Global/FontFamily';
+import {Badge} from 'react-native-paper';
+import {useNavigation} from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
-import { scr_height, scr_width } from '../../Components/Dimensions';
-import Video, { VideoRef } from 'react-native-video';
+import {scr_height, scr_width} from '../../Components/Dimensions';
+import Video, {VideoRef} from 'react-native-video';
 import FastImage from 'react-native-fast-image';
 import Videoplayercomponent from '../../Components/Videoplayercomponent';
 import fetchData from '../../Config/fetchData';
@@ -69,11 +69,11 @@ const HomeScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [getvideo, setgetvideo] = useState([]);
   const [Currentvideo, setCurrentvideo] = useState(null);
-  const [userdata, setuserdata] = useState([]);
-  const [scoredata, setscoredata] = useState([]);
+  const [userdata, setuserdata] = useState(null);
+  const [scoredata, setscoredata] = useState(null);
   const [Feedback, setFeedback] = useState('');
-  const [getQuestion, setgetQuestion] = useState([]);
-  const [selctedAnswer, setSelctedAnswer] = useState([]);
+  const [getQuestion, setgetQuestion] = React.useState([]);
+  const [selctedAnswer, setSelctedAnswer] = React.useState([]);
   const [videoloader, setvideoloader] = useState(false);
 
   // Optional: Define callbacks for buffering and errors.
@@ -91,8 +91,8 @@ const HomeScreen = () => {
 
   // Callback for video progress
   const handleProgress = progress => {
-    console.log("progress", progress.currentTime);
-
+    console.log("progress",progress.currentTime);
+    
     setCurrentTime(progress.currentTime);
   };
 
@@ -119,7 +119,7 @@ const HomeScreen = () => {
       console.log('SSSSSS', Getquestion);
       if (Getquestion?.success == true) {
         setgetQuestion(Getquestion?.data);
-        setHomeSection([{ id: 2, title: 'SimTest', data: ['SimTest'] }]);
+        setHomeSection([{id: 2, title: 'SimTest', data: ['SimTest']}]);
         setLoading(false);
         console.log('checked', Getquestion?.data);
       } else {
@@ -131,7 +131,7 @@ const HomeScreen = () => {
   };
 
   const handleSelectAnswer = (questionId, optionValue) => {
-    setSelctedAnswer(prev => ({ ...prev, [questionId]: optionValue }));
+    setSelctedAnswer(prev => ({...prev, [questionId]: optionValue}));
   };
   // Format time as mm:ss
   const formatTime = time => {
@@ -140,13 +140,13 @@ const HomeScreen = () => {
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   };
   const formatDate = (isoDate) => {
-    console.log("data", isoDate);
-
+    console.log("data",isoDate);
+    
     const date = new Date(isoDate);
-
+  
     // Options for formatting the date
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
-
+  
     return `Updated on ${date.toLocaleDateString('en-US', options)}`;
   };
 
@@ -179,49 +179,14 @@ const HomeScreen = () => {
   // GET VIDEO :
   const Getvideo = async () => {
     try {
-      const getvideo = await fetchData?.UserLesson();
-      console.log("Video ============= : ", getvideo);
-
-      const filterdata = getvideo?.data?.sort(
+      const Getvideo = await fetchData?.UserLesson();
+      const filterdata = Getvideo?.data?.sort(
         (a, b) =>
           a?.lesson_details?.video_order - b?.lesson_details?.video_order,
       );
       setgetvideo(filterdata);
 
-
-
-      // const ACCESS_TOKEN = await AsyncStorage.getItem('ACCESS_TOKEN');
-
-      // console.log('ACCESS_TOKEN ============ :', ACCESS_TOKEN);
-
-      // const myHeaders = new Headers();
-      // myHeaders.append("accept", "*/*");
-      // myHeaders.append("Authorization", `Bearer ${ACCESS_TOKEN}`);
-
-      // const requestOptions = {
-      //   method: "GET",
-      //   headers: myHeaders,
-      //   redirect: "follow"
-      // };
-
-      // fetch("https://api.cignix.com/user-lesson?username=Arun", requestOptions)
-      //   .then((response) => response.json())
-      //   .then((result) => {
-      //     console.log("Result ====================== :", result)
-      //     const filterdata = result?.data?.sort(
-      //       (a, b) =>
-      //         a?.lesson_details?.video_order - b?.lesson_details?.video_order,
-      //     );
-      //     setgetvideo(result?.data);
-
-      //   })
-      //   .catch((error) => console.error(error));
-
-
-
-
-
-
+      console.log('Getvideo?.data', Getvideo?.data);
     } catch (error) {
       console.log('Catch in Getvideo', error);
     }
@@ -229,42 +194,43 @@ const HomeScreen = () => {
   // USERDATA :
   const Userdata = async () => {
     try {
-      const userdata = await fetchData?.Getuserdata();
-      console.log('vhjb', userdata?.data);
-      if (userdata?.success == true) {
-        setuserdata(userdata?.data);
-        if (userdata?.data?.step == 0) {
+      const Userdata = await fetchData?.Getuserdata();
+      console.log('vhjb', Userdata?.data);
+      if (Userdata?.success == true) {
+        setuserdata(Userdata?.data);
+        if (Userdata?.data?.step == 0) {
           GetQustion();
         } else {
           console.log(
             '<=========================>USER DATA<==========================>',
           );
-          console.log('userdata', userdata);
+          console.log('userdata', Userdata);
           await Get_Score();
           setHomeSection([
-            { id: 1, title: 'Profile', data: ['Profile'] },
-            { id: 2, title: 'Score', data: ['Score'] },
-            { id: 3, title: 'Recommended Videos', data: ['Recommended Videos'] },
-            { id: 4, title: 'Upcoming Videos', data: ['Upcoming Videos'] },
+            {id: 1, title: 'Profile', data: ['Profile']},
+            {id: 2, title: 'Score', data: ['Score']},
+            {id: 3, title: 'Recommended Videos', data: ['Recommended Videos']},
+            {id: 4, title: 'Upcoming Videos', data: ['Upcoming Videos']},
           ]);
           setLoading(false);
         }
       }
     } catch (error) {
-      console.log('Catch in userdata', error);
+      console.log('Catch in Userdata', error);
     }
   };
   // GET SCORE :
   const Get_Score = async () => {
     try {
-      const get_Score = await fetchData?.Get_Score();
+      const Get_Score = await fetchData?.Get_Score();
+      console.log('GET SCORE', Get_Score);
       console.log('<===================>GET SCORE<===================>');
-      console.log('GET SCORE', get_Score);
-      if (get_Score?.success == true) {
-        setscoredata(get_Score?.data);
+      if (Get_Score?.success == true) {
+        setscoredata(Get_Score?.data);
+        console.log('<===================>GET SCORE<=======ffff============>');
         console.log('get Success the Score');
       } else {
-        console.log('get_Score?.data', get_Score?.data);
+        console.log('Get_Score?.data', Get_Score?.data);
       }
     } catch (error) {
       console.log('Catch in Score', error);
@@ -303,7 +269,7 @@ const HomeScreen = () => {
         console.log('PUT_END_VIDEOPUT_END_VIDEOPUT_END_VIDEOPUT_END_VIDEO');
         // refRBSheet.current.open();
         console.log("jdnjkdvbjvbvjb");
-
+        
         Getvideo();
         console.log('Success in video end');
       } else {
@@ -315,10 +281,10 @@ const HomeScreen = () => {
     }
   };
   // RENDER :
-  const renderItem = ({ item, index }) => {
+  const renderItem = ({item, index}) => {
     return (
-      <View style={{ gap: 20, width: scr_width - 40 }}>
-        <View style={{ gap: 10, marginTop: 20 }}>
+      <View style={{gap: 20, width: scr_width - 40}}>
+        <View style={{gap: 10, marginTop: 20}}>
           <Text
             style={{
               fontSize: 12,
@@ -336,10 +302,10 @@ const HomeScreen = () => {
             {item?.question} ?
           </Text>
         </View>
-        <View style={{ gap: 25, paddingLeft: 5 }}>
+        <View style={{gap: 25, paddingLeft: 5}}>
           <FlatList
             data={item?.options}
-            renderItem={({ item: option }) => {
+            renderItem={({item: option}) => {
               return (
                 <Pressable
                   style={{
@@ -435,7 +401,15 @@ const HomeScreen = () => {
       const SIMTEST_UPDATE_SCORE = await fetchData?.POST_USER_LESSON(data);
       console.log('SIMTEST_UPDATE_SCORE', SIMTEST_UPDATE_SCORE);
       if (SIMTEST_UPDATE_SCORE?.success == true) {
-        UserStep();
+        console.log("=============>");
+        console.log("=============>");
+        console.log("=============>");
+        console.log("=============>");
+        console.log("=============>");
+        console.log("=============>");
+        console.log("=============>");
+        
+       await UserStep();
         common_fn.showToast('Answer Submited Successfully');
       } else {
         console.log('SIMTEST_UPDATE_SCORE', SIMTEST_UPDATE_SCORE);
@@ -452,12 +426,14 @@ const HomeScreen = () => {
       const Stepupdate = await fetchData?.UpdateProfile(formData);
       if (Stepupdate?.success == true) {
         // Userdata();
+        console.log("jkcbkv",Stepupdate,"jkbjhbvjh");
+        
         await Get_Score();
         setHomeSection([
-          { id: 1, title: 'Profile', data: ['Profile'] },
-          { id: 2, title: 'Score', data: ['Score'] },
-          { id: 3, title: 'Recommended Videos', data: ['Recommended Videos'] },
-          { id: 4, title: 'Upcoming Videos', data: ['Upcoming Videos'] },
+          {id: 1, title: 'Profile', data: ['Profile']},
+          {id: 2, title: 'Score', data: ['Score']},
+          {id: 3, title: 'Recommended Videos', data: ['Recommended Videos']},
+          // {id: 4, title: 'Upcoming Videos', data: ['Upcoming Videos']},
         ]);
 
         console.log('Stepupdate', Stepupdate);
@@ -469,7 +445,7 @@ const HomeScreen = () => {
     }
   };
   if (loading == true) {
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <ActivityIndicator size="large" color="#4254B6" />
     </View>;
   }
@@ -477,7 +453,7 @@ const HomeScreen = () => {
   //  Datafunction :
   const Datafunction = async timestamp => {
     const date = new Date(timestamp);
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const options = {year: 'numeric', month: 'long', day: 'numeric'};
     const formattedDate = `Updated on ${date.toLocaleDateString(
       'en-US',
       options,
@@ -487,78 +463,79 @@ const HomeScreen = () => {
 
   // ======>VIDEOS FUNCTION <====== //
 
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0.1);
-  const [paused, setPaused] = useState(false);
-  const [overlay, setOverlay] = useState(false);
-  // const [loader, setLoader] = useState(true);
-  const [fullscreen, setFullscreen] = useState(false);
-
-  const videoRef = useRef(null);
-  const overlayTimer = useRef(null);
-  const lastTap = useRef(null);
+   const [currentTime, setCurrentTime] = useState(0);
+      const [duration, setDuration] = useState(0.1);
+      const [paused, setPaused] = useState(false);
+      const [overlay, setOverlay] = useState(false);
+      // const [loader, setLoader] = useState(true);
+      const [fullscreen, setFullscreen] = useState(false);
+  
+      const videoRef = useRef(null);
+    const overlayTimer = useRef(null);
+      const lastTap = useRef(null);
   const handleFullscreen = () => {
     const newFullscreen = !fullscreen;
     console.log("newFullscreen", newFullscreen);
-
+    
     if (newFullscreen) {
-      Orientation.lockToLandscape();
+        Orientation.lockToLandscape();
     } else {
-      Orientation.lockToPortrait();
+        Orientation.lockToPortrait();
     }
     setFullscreen(newFullscreen);
-  };
-  const handleDoubleTap = (doubleTapCallback, singleTapCallback) => {
-    const now = Date.now();
-    const DOUBLE_PRESS_DELAY = 300;
-    if (lastTap.current && now - lastTap.current < DOUBLE_PRESS_DELAY) {
+};
+const handleDoubleTap = (doubleTapCallback, singleTapCallback) => {
+  const now = Date.now();
+  const DOUBLE_PRESS_DELAY = 300;
+  if (lastTap.current && now - lastTap.current < DOUBLE_PRESS_DELAY) {
       clearTimeout(30);
       doubleTapCallback();
-    } else {
+  } else {
       lastTap.current = now;
       const timer = setTimeout(() => {
-        singleTapCallback();
+          singleTapCallback();
       }, DOUBLE_PRESS_DELAY);
-    }
-  };
+  }
+};
 
-  const getTime = t => {
-    const digit = n => (n < 10 ? `0${n}` : `${n}`);
-    const sec = digit(Math.floor(t % 60));
-    const min = digit(Math.floor((t / 60) % 60));
-    const hr = digit(Math.floor((t / 3600) % 60));
-    return hr + ':' + min + ':' + sec;
-  };
+const getTime = t => {
+  const digit = n => (n < 10 ? `0${n}` : `${n}`);
+  const sec = digit(Math.floor(t % 60));
+  const min = digit(Math.floor((t / 60) % 60));
+  const hr = digit(Math.floor((t / 3600) % 60));
+  return hr + ':' + min + ':' + sec;
+};
 
-  const load = ({ duration }) => {
-    setDuration(duration), setLoader(false), console.log('loaded', duration);
-  };
-  const progress = ({ currentTime }) => {
-    console.log('currentTime', currentTime);
-    console.log('duration', duration);
-    setCurrentTime(currentTime);
-    if (Math.round(currentTime) === Math.round(duration - 0.025)) {
+const load = ({ duration }) => {
+  setDuration(duration), setLoader(false), console.log('loaded', duration);
+};
+const progress = ({ currentTime }) => {
+  console.log('currentTime', currentTime);
+  console.log('duration', duration);
+  setCurrentTime(currentTime);
+  if (Math.round(currentTime) === Math.round(duration - 0.025)) {
       console.log('Video has ended');
       setPaused(!paused);
       setCurrentTime(0);
       videoRef.current.seek(0);
-    }
-  };
+  }
+};
 
-  const backward = () => {
-    if (Math.round(currentTime) >= 5) {
+const backward = () => {
+  if(Math.round(currentTime) >= 5 )
+  {
       videoRef.current.seek(currentTime - 5);
       clearTimeout(timer);
       overlayTimer = setTimeout(() => setOverlay(false), 3000);
-    } else {
-      common_fn?.showToast("You can't go backward");
-    }
+  }else{
+       common_fn?.showToast("You can't go backward");
+  }
+  
+};
 
-  };
-
-  const forward = () => {
-    common_fn?.showToast("You can't go forward");
-  };
+const forward = () => {
+  common_fn?.showToast("You can't go forward");
+};
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar
@@ -574,8 +551,8 @@ const HomeScreen = () => {
           // justifyContent: 'center',
           alignItems: 'center',
         }}
-        start={{ x: 0, y: 1 }}
-        end={{ x: 0, y: 0 }}
+        start={{x: 0, y: 1}}
+        end={{x: 0, y: 0}}
         colors={['#ffffff', '#D9DDF0']}>
         <View
           style={{
@@ -592,7 +569,7 @@ const HomeScreen = () => {
               navigation.reset({
                 index: 0,
                 routes: [
-                  { name: 'Tab', params: { screen: 'ProfileTab' } },
+                  {name: 'Tab', params: {screen: 'ProfileTab'}},
                 ],
               });
             }}
@@ -661,10 +638,10 @@ const HomeScreen = () => {
             </Text>
           </View>
           <TouchableOpacity
-            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}
             onPress={() => navigation.navigate('NotificationsList')}>
             <View
-              style={{ position: 'absolute', zIndex: 999, top: -5, right: 15 }}>
+              style={{position: 'absolute', zIndex: 999, top: -5, right: 15}}>
               <Badge
                 badgeStyle={{
                   position: 'absolute',
@@ -679,7 +656,7 @@ const HomeScreen = () => {
               </Badge>
             </View>
             <Iconviewcomponent
-              viewstyle={{ alignItems: 'center', justifyContent: 'center' }}
+              viewstyle={{alignItems: 'center', justifyContent: 'center'}}
               Icontag="Ionicons"
               icon_size={30}
               icon_color={Color.black}
@@ -688,7 +665,7 @@ const HomeScreen = () => {
           </TouchableOpacity>
         </View>
         <View
-          style={{ width: scr_width - 50, height: height, alignItems: 'center' }}>
+          style={{width: scr_width - 50, height: height, alignItems: 'center'}}>
           <Animated.SectionList
             sections={homeSection}
             scrollEnabled={true}
@@ -697,12 +674,12 @@ const HomeScreen = () => {
             scrollEventThrottle={1}
             nestedScrollEnabled
             initialNumToRender={5}
-            renderItem={({ item }) => {
+            renderItem={({item}) => {
               switch (item) {
                 case 'Profile':
                   return userdata?.step == 3 ? (
                     <View>
-                      <View style={{ marginBottom: 20 }}>
+                      <View style={{marginBottom: 20}}>
                         <Text
                           style={{
                             fontFamily: Mulish?.SemiBold,
@@ -716,7 +693,7 @@ const HomeScreen = () => {
                       <View>
                         <FlatList
                           data={scoredata}
-                          renderItem={({ item }) => {
+                          renderItem={({item}) => {
                             console.log('item', item);
 
                             return (
@@ -749,7 +726,7 @@ const HomeScreen = () => {
                                   </Text>
                                 </View>
                                 <View>
-                                  <View style={{ flexDirection: 'row' }}>
+                                  <View style={{flexDirection: 'row'}}>
                                     <Text
                                       style={{
                                         fontSize: 50,
@@ -758,23 +735,23 @@ const HomeScreen = () => {
                                       }}>
                                       {`${item?.total_points}` + '/' + `250`}
                                     </Text>
-                                    {
-                                      item?.attempt == 2 ?
-                                        (
-                                          <View
-                                            style={{
-                                              padding: 5,
-                                              backgroundColor: '#D9DDF0',
-                                              borderRadius: 100,
-                                              width: 70,
-                                              height: 30,
-                                              alignItems: 'center',
-                                              justifyContent: 'center',
-                                            }}>
-                                            <Text>{scoredata[0]?.total_points - scoredata[1]?.total_points} Pts</Text>
-                                          </View>
-                                        ) : null
-                                    }
+                                   {
+                                    item?.attempt == 2  ?
+                                    (
+<View
+                                      style={{
+                                        padding: 5,
+                                        backgroundColor: '#D9DDF0',
+                                        borderRadius: 100,
+                                        width: 70,
+                                        height: 30,
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                      }}>
+                                      <Text>{scoredata[0]?.total_points  - scoredata[1]?.total_points} Pts</Text>
+                                    </View>
+                                    ):null
+                                   } 
                                   </View>
                                   <View>
                                     <Text
@@ -801,7 +778,7 @@ const HomeScreen = () => {
                           }}>
                           <Image
                             source={require('../../assets/Images/accepts.png')}
-                            style={{ width: 50, height: 50 }}
+                            style={{width: 50, height: 50}}
                           />
                           <View>
                             <Text
@@ -865,12 +842,14 @@ const HomeScreen = () => {
                               fontFamily: Mulish.SemiBold,
                               letterSpacing: 0.5,
                             }}>
-                            {`${scoredata[0]?.total_points
-                              ? scoredata[0]?.total_points
-                              : 0
-                              }` +
+                            {`${
+                              scoredata[0]?.total_points
+                                ? scoredata[0]?.total_points
+                                : 0
+                            }` +
                               '/' +
                               `250`}
+                    
                           </Text>
                           <Text
                             style={{
@@ -878,11 +857,12 @@ const HomeScreen = () => {
                               color: Color.white,
                               fontFamily: Mulish.Medium,
                             }}>
-                            {Datafunction(
+                            {/* {Datafunction(
                               scoredata[0]?.updatedAt
                                 ? scoredata[0]?.updatedAt
                                 : '',
-                            )}
+                            )} */}
+                            updated on October 23, 2024.
                           </Text>
 
                           <TouchableOpacity
@@ -1057,7 +1037,7 @@ const HomeScreen = () => {
                 case 'SimTest':
                   return (
                     <ScrollView
-                      style={{ width: scr_width, marginBottom: scr_height / 4 }}>
+                      style={{width: scr_width, marginBottom: scr_height / 4}}>
                       <Text
                         style={{
                           fontFamily: Mulish?.SemiBold,
@@ -1072,7 +1052,7 @@ const HomeScreen = () => {
                         renderItem={renderItem}
                         keyExtractor={item => item._id}
                         showsVerticalScrollIndicator={false}
-                        contentContainerStyle={{ gap: 20 }}
+                        contentContainerStyle={{gap: 20}}
                       />
                     </ScrollView>
                   );
@@ -1123,14 +1103,14 @@ const HomeScreen = () => {
                             }
                           }}
                         /> */}
-
+                        
                         {/* <View style={{width:'100%'}}> */}
 
-                        <Videoplayercomponent source={Currentvideo?.lesson_details?.source}
-                          Videoendfun={Videoend}
-                          currentdata={Currentvideo}
-                        />
-                        {/* </View> */}
+                        <Videoplayercomponent source={Currentvideo?.lesson_details?.source} 
+                        Videoendfun={Videoend}
+                         currentdata={Currentvideo}
+     />
+                          {/* </View> */}
                         {/* <View style={styles.controls}>
                           <TouchableOpacity onPress={togglePlayPause}>
                             <Icon
@@ -1144,7 +1124,7 @@ const HomeScreen = () => {
                             {formatTime(currentTime)} / {formatTime(duration)}
                           </Text>
                         </View> */}
-                        <View style={{ gap: 5 }}>
+                        <View style={{gap: 5}}>
                           <Text
                             style={{
                               fontFamily: Mulish?.Medium,
@@ -1185,7 +1165,7 @@ const HomeScreen = () => {
                         Upcoming Videos
                       </Text>
                       <View
-                        style={{ width: '100%', marginBottom: scr_height / 5 }}>
+                        style={{width: '100%', marginBottom: scr_height / 5}}>
                         <FlatList
                           data={getvideo?.sort(
                             (a, b) =>
@@ -1194,7 +1174,7 @@ const HomeScreen = () => {
                           )}
                           horizontal
                           showsHorizontalScrollIndicator={false}
-                          renderItem={({ item, index }) => {
+                          renderItem={({item, index}) => {
                             return (
                               <View
                                 style={{
@@ -1365,7 +1345,7 @@ const HomeScreen = () => {
             padding: 23,
             alignItems: 'center',
           }}>
-          <View style={{ alignItems: 'center', gap: 15, flex: 1 }}>
+          <View style={{alignItems: 'center', gap: 15, flex: 1}}>
             <View
               style={{
                 width: 100,
@@ -1391,7 +1371,7 @@ const HomeScreen = () => {
               }}>
               Any Questions?
             </Text>
-            <View style={{ alignItems: 'center' }}>
+            <View style={{alignItems: 'center'}}>
               <Text
                 style={{
                   alignItems: 'center',
@@ -1439,7 +1419,7 @@ const HomeScreen = () => {
               />
             </View>
           </View>
-          <View style={{ gap: 15, width: '100%' }}>
+          <View style={{gap: 15, width: '100%'}}>
             <TouchableOpacity
               style={{
                 padding: 23,
@@ -1545,7 +1525,7 @@ const HomeScreen = () => {
                   justifyContent: 'center',
                   borderRadius: 50,
                 }}>
-                <Text style={{ color: '#000' }}>x</Text>
+                <Text style={{color: '#000'}}>x</Text>
               </Pressable>
               <TouchableOpacity
                 style={{
@@ -1629,36 +1609,36 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontSize: 14,
   },
-  video: { ...StyleSheet.absoluteFillObject },
+  video: {  ...StyleSheet.absoluteFillObject},
   fullscreenVideo: {
-    backgroundColor: 'black',
-    ...StyleSheet.absoluteFill,
-    elevation: 1,
+      backgroundColor: 'black',
+      ...StyleSheet.absoluteFill,
+      elevation: 1,
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
-  },
-  overlaySet: {
-    flex: 1,
-    flexDirection: 'row',
-  },
-  icon: {
-    color: 'white',
-    flex: 1,
-    textAlign: 'center',
-    textAlignVertical: 'center',
-    fontSize: 30,
-  },
-  timer: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 5,
-  },
-  overlaySet: {
-    flex: 1,
-    flexDirection: 'row',
-  },
+},
+overlaySet: {
+  flex: 1,
+  flexDirection: 'row',
+},
+icon: {
+  color: 'white',
+  flex: 1,
+  textAlign: 'center',
+  textAlignVertical: 'center',
+  fontSize: 30,
+},
+timer: {
+  width: '100%',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  paddingHorizontal: 5,
+},
+overlaySet: {
+  flex: 1,
+  flexDirection: 'row',
+},
 });
 
 //make this component available to the app

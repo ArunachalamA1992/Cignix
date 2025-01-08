@@ -80,7 +80,7 @@ const EmailPassword = () => {
           data,
         );
         if (Emailpassword?.message == 'Login Successfully') {
-          await AsyncStorage.setItem('ACCESS_TOKEN', Emailpassword?.token);
+          await AsyncStorage.setItem('ACCESS_TOKEN', JSON.stringify(Emailpassword?.token));
           await AsyncStorage.setItem(
             'USERDATA',
             JSON.stringify(Emailpassword?.data),

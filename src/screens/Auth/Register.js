@@ -138,7 +138,7 @@ const Register = ({ navigation, route }) => {
 
         const Registerapi = await fetchData?.Register(Registerdata);
         if (Registerapi?.success == true) {
-          await AsyncStorage.setItem('ACCESS_TOKEN', Registerapi?.token);
+          await AsyncStorage.setItem('ACCESS_TOKEN', JSON.stringify(Registerapi?.token));
           await AsyncStorage.setItem(
             'USERDATA',
             JSON.stringify(Registerapi?.data),

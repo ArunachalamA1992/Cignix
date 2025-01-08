@@ -26,6 +26,12 @@ import { Platform } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native';
 import fetchData from '../../Config/fetchData';
 
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
+
 const DismissKeyboard = ({ children }) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
     {children}
@@ -42,6 +48,23 @@ const Login = () => {
   const [uniqueId, setUniqueId] = useState(false);
   const [userInfo, setUserInfo] = useState(false);
   const [loader, setloader] = useState(false);
+
+
+  useEffect(() => {
+    try {
+      GoogleSignin.configure({
+        scopes: ['email', 'profile'],
+        webClientId: '542915280674-ksrh2555r57pc5ml1gb09bsqft4fq7cn.apps.googleusercontent.com',
+        offlineAccess: false,
+        // webClientId: '1080007356916-6amrf74qvgd060rprqqeegs06s168dn1.apps.googleusercontent.com',
+        // offlineAccess: true,
+        // hostedDomain: '',
+        // forceConsentPrompt: true,
+      });
+    } catch (error) {
+      console.log('error ----------- : ', error);
+    }
+  }, []);
 
   const chkNumber = number => {
     // setNumber(number);
@@ -83,24 +106,21 @@ const Login = () => {
     try {
       setloader(true);
       if (number.length == 10) {
-        console.log("eeee", "2222");
-
-        const login = await fetchData?.login({
-          mobile: number
+        const login_res = await fetchData?.login({
+          "mobile": number
         });
-        console.log("fvdfb", number);
 
-        console.log("gefefb", login);
+        console.log("login resp ================== :", login_res);
 
-        if (login?.success == true) {
-          common_fn.showToast(login?.message);
+        if (login_res?.success == true) {
+          common_fn.showToast(login_res?.message);
           navigation.navigate('OTPScreen', {
             number: number,
-            token: login?.token,
+            token: login_res?.token,
           });
           setloader(false);
         } else {
-          common_fn.showToast(login?.message);
+          common_fn.showToast(login_res?.message);
           setloader(false);
         }
       } else {
@@ -116,9 +136,32 @@ const Login = () => {
           setloader(false);
         }
       }
+
     } catch (error) {
       setloader(false);
       console.log('CATCH IN LOGIN', error);
+    }
+  };
+
+  const signIn = async () => {
+    try {
+      console.log("=========== Google singin =========== :");
+      // await GoogleSignin.hasPlayServices();
+      // const userInfo = await GoogleSignin.signIn();
+      // console.log("Google singin ==================== :", userInfo);
+
+    } catch (error) {
+      console.log("catch in signIn_login ----------: ", error);
+
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        // operation (e.g. sign in) is in progress already
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        // play services not available or outdated
+      } else {
+        // some other error happened
+      }
     }
   };
 
@@ -304,7 +347,7 @@ const Login = () => {
                   alignItems: 'center',
                   marginVertical: 20,
                 }}>
-                <TouchableOpacity
+                <TouchableOpacity onPress={() => signIn()}
                   style={{
                     flex: 1,
                     height: 60,

@@ -142,8 +142,10 @@ const OTPScreen = ({ route }) => {
                     otp: data,
                     token: token == null ? routeName?.token : token,
                 })
+                console.log("otp resp --------------- :",verify);
+                
                 if (verify?.success == true) {
-                    await AsyncStorage.setItem('ACCESS_TOKEN', verify?.token);
+                    await AsyncStorage.setItem('ACCESS_TOKEN', JSON.stringify(verify?.token));
                     await AsyncStorage.setItem('USERDATA', JSON.stringify(verify?.data));
                     common_fn.showToast(verify?.message);
                     navigation.reset({
