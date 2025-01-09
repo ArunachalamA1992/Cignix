@@ -8,13 +8,10 @@
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
 # Add any project specific keep options here:
--keepattributes Annotation
+-keepattributes *Annotation*
 -dontwarn com.razorpay.**
--keep class com.razorpay.* {;}
+-keep class com.razorpay.** { *; }
 -optimizations !method/inlining/
 -keepclasseswithmembers class * {
   public void onPayment*(...);
 }
-# Firebase Analytics
--keep class com.google.firebase.** { *; }
--keep class com.google.android.gms.** { *; }
